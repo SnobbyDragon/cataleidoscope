@@ -1,96 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="scrip.js" defer></script>
-  <title>Cataleidoscope</title>
-</head>
-<body>
-  <ul>
-    <li data-tab-target="#home">Home</li>
-    <li data-tab-target="#fib">Fibbonaci</li>
-    <li data-tab-target="#other">Other</li>
-  </ul>
-  <div class="tab-content">
-    <div id="home">
-      <h2>Home</h2>
-      <p>Home is where the heart is</p>
+  <head>
+    <script src="script.js" defer></script>
+    <title>Cataleidoscope</title>
+  </head>
+  <body>
+    <h1>Cataleidoscope</h1>
+    <ul>
+      <li data-tab-target="#home">Home</li>
+      <li data-tab-target="#fib">Fibonnaci</li>
+      <li data-tab-target="#other">Other</li>
+    </ul>
+    <div class="tab-content">
+      <div id="home">
+        <h2>Home</h2>
+        <p>Home is where the heart is</p>
+      </div>
+      <div id="fib">
+        <h2>Fibonacci</h2>
+        <p>We love spirals</p>
+        <p>How many Fibonacci cats?</p>
+
+        <input type="text" id="fibInput">
+        <button onclick="createFib()">Create Fibonacci Cats</button>
+
+        <div id="fibContainer" style="position: relative; margin-left: auto; margin-right: auto;"></div>
+      </div>
+      <div id="other">
+        <h2>Other</h2>
+        <p>Squaring the square might be hard</p>
+      </div>
     </div>
-    <div id="fib">
-      <h2>Fibbonaci</h2>
-      <p>We love spirals</p>
-    </div>
-    <div id="other">
-      <h2>Other</h2>
-      <p>Squaring the suqre might be hard</p>
-    </div>
-  </div>
-</body>
-<!--<body>
-<h1>Cataleidoscope</h1>
-
-<p>How many Fibonacci cats?</p>
-
-<input type="text" id="fibInput">
-<button onclick="createFib()">Create Fibonacci Cats</button>
-
-<div id="fibContainer" style="position: relative; margin-left: auto; margin-right: auto;"></div>
-
-<script>
-function clearImages(container) {
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-}
-
-function createFib() {
-  const n = document.getElementById("fibInput").value;
-  const container = document.getElementById("fibContainer");
-  clearImages(container); // destroy previous fibonacci tiling before making new one
-
-  // first generate fib sequence and top/left positions
-  var a = 0, b = 1;
-  var fibSeq = [];
-  var top = 0, left = 0;
-  var minTop = 0, minLeft = 0;
-  var tops = [], lefts = [];
-  for (let i = 0; i < n; i++) {
-    minTop = Math.min(top, minTop);
-    minLeft = Math.min(left, minLeft);
-    fibSeq.push(b);
-    tops.push(top);
-    lefts.push(left);
-    const dir = i%4; // 0 = next tile to the right, 1 = next tile up, 2 = next tile left, 3 = next tile down
-    if (dir == 0) {
-      top -= a;
-      left += b;
-    } else if (dir == 1) {
-      top -= a+b;
-      left -= a;
-    } else if (dir == 2) {
-      left -= a+b;
-    } else { // dir == 3
-      top += b;
-    }
-    let c = b;
-    b = a + b;
-    a = c;
-  }
-  // make all positions non negative
-  tops = tops.map(top => top - minTop);
-  lefts = lefts.map(left => left - minLeft);
-
-  const scale = 10;
-  for (let i = 0; i < n; i++) {
-    const rand = Math.floor(Math.random() * 100); // random query param to stop image caching (and get new cats)
-    const img = document.createElement("img");
-    img.src = 'https://cataas.com/cat?width=' + fibSeq[i]*scale + '&height=' + fibSeq[i]*scale + '&rand=' + rand;
-    img.style.position = 'absolute';
-    img.style.top = tops[i]*scale + 'px';
-    img.style.left = lefts[i]*scale + 'px';
-    container.appendChild(img);
-  }
-}
-</script>
-
-</body> -->
+  </body>
 </html>
