@@ -52,10 +52,13 @@ function createFib() {
   for (let i = 0; i < n; i++) {
     const rand = Math.floor(Math.random() * 100); // random query param to stop image caching (and get new cats)
     const img = document.createElement("img");
-    img.src = 'https://cataas.com/cat?width=' + fibSeq[i]*scale + '&height=' + fibSeq[i]*scale + '&rand=' + rand;
+    const size = fibSeq[i]*scale;
+    img.src = 'https://cataas.com/cat?width=' + size + '&height=' + size + '&rand=' + rand;
     img.style.position = 'absolute';
     img.style.top = tops[i]*scale + 'px';
     img.style.left = lefts[i]*scale + 'px';
+    img.style.width = size + 'px'; // cat images only go up to 1000x1000 so we need to stretch them out.......
+    img.style.height = size + 'px';
     container.appendChild(img);
   }
 }
