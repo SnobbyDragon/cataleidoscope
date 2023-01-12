@@ -72,3 +72,55 @@ function createFib() {
     container.appendChild(img);
   }
 }
+
+function createCats() {
+  const n = document.getElementById("catInput").value;
+  const container = document.getElementById("catContainer");
+  clearImages(container); // destroy previous fibonacci tiling before making new one
+
+  // first generate fib sequence and top/left positions
+  var a = 1, b = 2;
+  var pellSeq = [];
+  var top = 0, left = 0;
+  var minTop = 0, minLeft = 0;
+  var tops = [], lefts = [];
+  for (let i = 0; i < n; i++) {
+    minTop = Math.min(top, minTop);
+    minLeft = Math.min(left, minLeft);
+    pellSeq.push(b);
+    tops.push(top);
+    lefts.push(left);
+    const dir = i%4; // 0 = next tile to the right, 1 = next tile up, 2 = next tile left, 3 = next tile down
+    if (dir == 0) {
+      top -= a;
+      left += b;
+    } else if (dir == 1) {
+      top -= a+2*b;
+      left -= a;
+    } else if (dir == 2) {
+      left -= a+2*b;
+    } else { // dir == 3
+      top +=b;
+    }
+    let c = b;
+    b = 2*b + a;
+    a = c;
+  }
+  // make all positions non negative
+  tops = tops.map(top => top - minTop);
+  lefts = lefts.map(left => left - minLeft);
+
+  const scale = 10;
+  for (let i = 0; i < n; i++) {
+    const rand = Math.floor(Math.random() * 100); // random query param to stop image caching (and get new cats)
+    const img = document.createElement("img");
+    const size = pellSeq[i]*scale;
+    img.src = 'https://cataas.com/cat?width=' + size + '&height=' + size + '&rand=' + rand;
+    img.style.position = 'absolute';
+    img.style.top = tops[i]*scale + 'px';
+    img.style.left = lefts[i]*scale + 'px';
+    img.style.width = size + 'px'; // cat images only go up to 1000x1000 so we need to stretch them out.......
+    img.style.height = size + 'px';
+    container.appendChild(img);
+  }
+}
