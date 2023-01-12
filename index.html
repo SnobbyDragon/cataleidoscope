@@ -2,21 +2,22 @@
 <html>
   <head>
     <script src="script.js" defer></script>
+    <link href="styles.css" rel="stylesheet">
     <title>Cataleidoscope</title>
   </head>
   <body>
     <h1>Cataleidoscope</h1>
-    <ul>
-      <li data-tab-target="#home">Home</li>
-      <li data-tab-target="#fib">Fibonacci</li>
-      <li data-tab-target="#other">Other</li>
+    <ul class="tabs">
+      <li data-tab-target="#home" class="active tab">Home</li>
+      <li data-tab-target="#fib" class="tab">Fibonacci</li>
+      <li data-tab-target="#other" class="tab">Other</li>
     </ul>
     <div class="tab-content">
-      <div id="home">
+      <div id="home" data-tab-content class="active">
         <h2>Home</h2>
         <p>Home is where the heart is</p>
       </div>
-      <div id="fib">
+      <div id="fib" data-tab-content>
         <h2>Fibonacci</h2>
         <p>We love spirals</p>
         <p>How many Fibonacci cats?</p>
@@ -26,7 +27,7 @@
 
         <div id="fibContainer" style="position: relative; margin-left: auto; margin-right: auto;"></div>
       </div>
-      <div id="other">
+      <div id="other" data-tab-content>
         <h2>Other</h2>
         <p>Squaring the square might be hard</p>
       </div>
